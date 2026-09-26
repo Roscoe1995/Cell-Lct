@@ -1,14 +1,25 @@
 # Cell-lct
 
-The Skill and companion scripts in this repository are open source under the [MIT License](LICENSE), allowing modification and derivative work. Third-party API services are maintained by their providers.
+Rebuild a reference image as editable Adobe Illustrator paths and live text, then append the result to the document the user already has open.
 
-## New: optional AI hidden-watermark treatment in the drawing workflow
+`Cell-lct` records the source labels, recognizes paths from a verified text-free working image, parses the returned SVG once, and writes objects in source layer order. Existing artwork remains untouched, while the completed AI file and PNG preview are retained.
 
-The latest `main` integrates the independently open-source [cell_no_ai](https://github.com/yrui-cmd/cell_no_ai). After text cleanup, choose optional AI hidden-watermark treatment; the workflow downloads the processed image before vectorization, then restores editable text and creates native editable Adobe Illustrator artwork. Declining the treatment continues the original drawing workflow.
+## What you get
 
-Installation also installs or updates `cell_no_ai`, and new image-reconstruction jobs check its latest version automatically. Treatment is provided through a third-party API; effectiveness depends on the service output and verification results.
+- native editable Illustrator paths;
+- restored live SVG text;
+- compound paths, holes, and source paint order preserved;
+- reusable geometry cache and resumable stages;
+- a completed AI file and PNG preview.
 
-Install from the latest `main` for this feature. The historical `v0.2.1` tag and ZIP described below do not include this update:
+## Choose a release
+
+- **Latest `main`** includes the optional [cell_no_ai](https://github.com/yrui-cmd/cell_no_ai) handoff for the current complete workflow.
+- **Pinned `v0.2.1`** is the locked and release-tested Windows build. It does not include later integrations.
+
+The latest workflow asks whether to use `cell_no_ai` after text cleanup. If accepted, it downloads the processed result before vectorization; if declined, it uses the verified cleaned image directly. Installing the dependency does not authorize paid processing. Third-party effectiveness depends on the returned file and subsequent verification.
+
+Install the latest `main`:
 
 ```powershell
 git clone --branch main --depth 1 https://github.com/yrui-cmd/cell-lct.git
@@ -16,7 +27,7 @@ Set-Location .\cell-lct
 powershell -ExecutionPolicy Bypass -File .\setup.ps1
 ```
 
-Cell-lct `v0.2.1` is the stable Windows release for reconstructing editable scientific vectors and live SVG text in a user-opened Adobe Illustrator 2026 document through Codex Desktop.
+The pinned tag, checksum, and runtime contract below describe the `v0.2.1` stable release.
 
 ## Stable-release contract
 

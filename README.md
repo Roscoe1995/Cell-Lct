@@ -1,14 +1,25 @@
 # Cell-lct
 
-本仓库的 Skill 与配套脚本采用 [MIT 许可证](LICENSE) 开源，欢迎修改和二次创作；第三方 API 服务由其提供方维护。
+把参考图重建为 Adobe Illustrator 中可继续修改的矢量路径和真实文本，并追加到用户已经打开的画板。
 
-## 新亮点：去 AI 隐藏水印与可编辑绘图衔接
+`Cell-lct` 先记录文字，再从去字后的工作图识别路径；返回的 SVG 只解析一次，随后按原图层级分批写入 Illustrator。已有画板内容保持不变，最终同时保留可编辑 AI 文件和导出的 PNG。
 
-最新 `main` 已接入独立开源的 [cell_no_ai](https://github.com/yrui-cmd/cell_no_ai)：去字后可选择进行 AI 隐藏水印处理，自动接收返回图片，再继续描摹并恢复可编辑文字，生成 Adobe Illustrator 原生可编辑矢量图。选择跳过时直接继续原有绘图流程。
+## 你会得到
 
-安装时会同时安装或更新 `cell_no_ai`，新的图片重建任务会自动检查其最新版本。隐藏水印处理由第三方 API 提供；支持的是处理流程，具体效果以服务返回及检测结果为准。
+- Illustrator 原生可编辑路径；
+- 恢复为真实 SVG 文本的文字内容；
+- 保留复合路径、镂空和原图绘制顺序；
+- 可续画的几何缓存与阶段结果；
+- 完成后的 AI 文件和 PNG 预览。
 
-使用此新功能请从最新 `main` 安装；下方历史 `v0.2.1` Tag/ZIP 不包含本次更新：
+## 选择安装版本
+
+- **最新 `main`**：包含可选的 [cell_no_ai](https://github.com/yrui-cmd/cell_no_ai) 隐藏水印处理衔接，适合使用当前完整流程。
+- **固定 `v0.2.1`**：经过锁定和发行验证的 Windows 稳定版，不包含后续接入的新功能。
+
+最新流程会在去字后询问是否使用 `cell_no_ai`。选择使用时，必须先接收处理结果再继续矢量识别；选择跳过时直接使用已核对的去字图。安装会同步该独立 Skill，但安装依赖不等于授权付费处理。第三方处理效果以服务返回和后续验证为准。
+
+从最新 `main` 安装：
 
 ```powershell
 git clone --branch main --depth 1 https://github.com/yrui-cmd/cell-lct.git
@@ -16,7 +27,7 @@ Set-Location .\cell-lct
 powershell -ExecutionPolicy Bypass -File .\setup.ps1
 ```
 
-Cell-lct `v0.2.1` 是面向 Windows、Codex Desktop 与 Adobe Illustrator 2026 的稳定版科研矢量绘图插件。它将参考图重建为可编辑路径和真实 SVG 文本，并续画到用户已经打开的 Illustrator 文档中。
+下方的固定 Tag、校验文件和环境契约对应 `v0.2.1` 稳定版。
 
 ## 稳定版保证
 
